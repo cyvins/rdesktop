@@ -255,12 +255,15 @@ void reset_modifier_keys(void);
 void rdp_send_scancode(uint32 time, uint16 flags, uint8 scancode);
 /* xwin.c */
 RD_BOOL get_key_state(unsigned int state, uint32 keysym);
+int get_keysym_mask(uint32 keysym);
 RD_BOOL ui_init(void);
 void ui_init_connection(void);
 void ui_deinit(void);
 RD_BOOL ui_create_window(void);
 void ui_resize_window(void);
 void ui_destroy_window(void);
+void xwin_grab_keyboard(void);
+void xwin_ungrab_keyboard(void);
 RD_BOOL ui_have_window(void);
 void xwin_toggle_fullscreen(void);
 int ui_select(int rdp_socket);
@@ -274,6 +277,7 @@ RD_HCURSOR ui_create_cursor(unsigned int x, unsigned int y, int width, int heigh
 			    uint8 * xormask, int bpp);
 void ui_set_cursor(RD_HCURSOR cursor);
 void ui_destroy_cursor(RD_HCURSOR cursor);
+void ui_refresh_cursor(void);
 void ui_set_null_cursor(void);
 RD_HCOLOURMAP ui_create_colourmap(COLOURMAP * colours);
 void ui_destroy_colourmap(RD_HCOLOURMAP map);
