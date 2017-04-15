@@ -96,6 +96,7 @@ RD_BOOL g_desktop_save = True;	/* desktop save order */
 RD_BOOL g_polygon_ellipse_orders = True;	/* polygon / ellipse orders */
 RD_BOOL g_fullscreen = False;
 RD_BOOL g_grab_keyboard = True;
+RD_BOOL g_disable_win_key = False;
 RD_BOOL g_hide_decorations = False;
 RDP_VERSION g_rdp_version = RDP_V5;	/* Default to version 5 */
 RD_BOOL g_rdpclip = True;
@@ -195,6 +196,7 @@ usage(char *program)
 	fprintf(stderr, "   -C: use private colour map\n");
 	fprintf(stderr, "   -D: hide window manager decorations\n");
 	fprintf(stderr, "   -K: keep window manager key bindings\n");
+	fprintf(stderr, "   -W: disable win key for client\n");
 	fprintf(stderr, "   -S: caption button size (single application mode)\n");
 	fprintf(stderr, "   -T: window title\n");
 	fprintf(stderr, "   -t: disable use of remote ctrl\n");
@@ -571,7 +573,7 @@ main(int argc, char *argv[])
 #define VNCOPT
 #endif
 	while ((c = getopt(argc, argv,
-			   VNCOPT "A:u:L:d:s:c:p:n:k:g:o:fbBeEitmzCDKS:T:NX:a:x:Pr:045vh?")) != -1)
+			   VNCOPT "A:u:L:d:s:c:p:n:k:g:o:fbBeEitmzCDKWS:T:NX:a:x:Pr:045vh?")) != -1)
 	{
 		switch (c)
 		{
@@ -738,6 +740,10 @@ main(int argc, char *argv[])
 
 			case 'K':
 				g_grab_keyboard = False;
+				break;
+
+			case 'W':
+				g_disable_win_key = True;
 				break;
 
 			case 'S':

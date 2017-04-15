@@ -50,6 +50,7 @@ extern int g_win_button_size;
 extern RD_BOOL g_enable_compose;
 extern RDP_VERSION g_rdp_version;
 extern RD_BOOL g_numlock_sync;
+extern RD_BOOL g_disable_win_key;
 
 static RD_BOOL keymap_loaded;
 static key_translation_entry *keymap[KEYMAP_SIZE];
@@ -639,6 +640,9 @@ reset_keypress_keysym(unsigned int keycode, KeySym keysym)
 RD_BOOL
 handle_special_keys(uint32 keysym, unsigned int state, uint32 ev_time, RD_BOOL pressed)
 {
+	if ((g_disable_win_key) && keysym == XK_Super_L)
+		return True;
+
 	switch (keysym)
 	{
 		case XK_Return:
